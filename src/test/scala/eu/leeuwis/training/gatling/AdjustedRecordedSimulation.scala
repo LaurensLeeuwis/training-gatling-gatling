@@ -132,7 +132,12 @@ class AdjustedRecordedSimulation extends Simulation {
     http("echoo").get(uri1 + "/echo").queryParam("message", "${testdata}")
   )
 
-  setUp(myScenario.inject(atOnceUsers(20))).protocols(httpProtocol)
+  val mySlowScenario = scenario("captain slow").exec(
+    http("slow").get(uri1 + "/slow")
+  )
+
+  setUp(mySlowScenario.inject(atOnceUsers(100))).protocols(httpProtocol)
+//  setUp(myScenario.inject(atOnceUsers(20))).protocols(httpProtocol)
 
 //  setUp(
 //    scn.inject(atOnceUsers(100))
