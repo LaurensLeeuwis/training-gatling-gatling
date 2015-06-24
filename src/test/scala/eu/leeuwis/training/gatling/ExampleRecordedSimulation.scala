@@ -78,7 +78,7 @@ class ExampleRecordedSimulation extends Simulation {
 			.get(uri1 + "/favicon.ico")
 			.headers(headers_9),
             http("request_10")
-			.get(uri1 + "/echo/echooo"))
+			.get(uri1 + "/echo?message=echooo"))
 			.check(status.is(304)))
 		.pause(12)
 		.exec(http("request_11")
@@ -112,7 +112,7 @@ class ExampleRecordedSimulation extends Simulation {
 			.check(status.is(304)))
 		.pause(1)
 		.exec(http("request_17")
-			.get("/echo/echooo"))
+			.get("/echo?message=echooo"))
 		.pause(1)
 		.exec(http("request_18")
 			.get("/my")
@@ -123,7 +123,7 @@ class ExampleRecordedSimulation extends Simulation {
 			.headers(headers_11)
 			.body(RawFileBody("ExampleRecordedSimulation_0019_request.txt"))
 			.resources(http("request_20")
-			.get(uri1 + "/echo/echooo"))
+			.get(uri1 + "/echo?message=echooo"))
 			.check(status.is(401)))
 
 	setUp(scn.inject(atOnceUsers(1))).protocols(httpProtocol)
